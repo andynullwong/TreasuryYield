@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class Main {
@@ -26,18 +27,20 @@ public class Main {
 		
 		String table_xPath = ("//table/tbody/tr/td/div/table/tbody/tr");
 		
-		int xSize = (driver.findElements(By.xpath(table_xPath)).size());
-		int ySize = (driver.findElements(By.xpath(Table.getRow_xPath(table_xPath, 1))).size());
+		ArrayList<ArrayList<String>> totalTable = new ArrayList<ArrayList<String>>();
+		ArrayList<String> headerTable = Table.getText(driver.findElements(By.xpath(Table.getHeader_xPath(table_xPath))));
+		ArrayList<String> rowTable = new ArrayList<String>();
 
-		ArrayList<String>[][] totalTable = new ArrayList[xSize][ySize];
-		for (int x=0; x<=xSize; x++) {
-			List<String> tempRow = Table.getText(driver.findElements(By.xpath(Table.getRow_xPath(table_xPath, x+1))));
-			//tempRow.get(1);
-			System.out.println("tempRow: "+tempRow);
-			for (int y=0; y<=ySize; y++) {
-				totalTable[x][y].add(tempRow.get(y));
-				System.out.println("totalTable: "+totalTable);
-			}
+		totalTable.add(headerTable);
+		
+		int entries = (driver.findElements(By.xpath(table_xPath)).size());
+		for (int x=1; x<entries; x++) {
+			rowTable = Table.getText(driver.findElements(By.xpath(Table.getRow_xPath(table_xPath, x+1))));
+			totalTable.add(rowTable);
 		}
+		System.out.println("totalTable_H: "+totalTable.get(0));
+		System.out.println("totalTable_1: "+totalTable.get(1));
+		System.out.println("totalTable_2: "+totalTable.get(2));
+		driver.close();
 	}
 }
