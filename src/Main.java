@@ -38,9 +38,10 @@ public class Main {
 			rowTable = Table.getText(driver.findElements(By.xpath(Table.getRow_xPath(table_xPath, x+1))));
 			totalTable.add(rowTable);
 		}
-		System.out.println("totalTable_H: "+totalTable.get(0));
-		System.out.println("totalTable_1: "+totalTable.get(1));
-		System.out.println("totalTable_2: "+totalTable.get(2));
 		driver.close();
+		
+		System.out.println(Functions.getRollingAvg(totalTable, 2));
+		System.out.println(Functions.getRollingAvg(totalTable, 3));
+		System.out.println(Functions.getRollingAvg(totalTable, 4));
 	}
 }
