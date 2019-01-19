@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -10,7 +11,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		// User defined variables
 //		Scanner yr = new Scanner(System.in);
 //		System.out.print("Enter Year you want to look up: ");
@@ -39,9 +40,12 @@ public class Main {
 			totalTable.add(rowTable);
 		}
 		driver.close();
+
+		System.out.println(Functions.getAverage(totalTable, 2));
+		System.out.println(Functions.getAverage(totalTable, 3));
+		System.out.println(Functions.getAverage(totalTable, 4));
 		
-		System.out.println(Functions.getRollingAvg(totalTable, 2));
-		System.out.println(Functions.getRollingAvg(totalTable, 3));
-		System.out.println(Functions.getRollingAvg(totalTable, 4));
+		System.out.println(Functions.getChange(totalTable, 3));
+		System.out.println(Functions.getChange(totalTable, 7));
 	}
 }
